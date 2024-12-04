@@ -25,3 +25,16 @@ export const oneUppCaseRule = (input) => {
         reason: "at least one upperCase needed"
     }
 }
+
+//-------------------- Functional injection techniques -----------------------
+const SUNDAY = 0, SATURDAY = 6, MONDAY = 1;
+
+export const verifyPassword3 = (input, rules, getDayFn) => {
+    const dayOfWeek = getDayFn();
+
+    if ([SATURDAY, SUNDAY].includes(dayOfWeek)) {
+        throw Error("It's the weekend!")
+    }
+
+    return [];
+}

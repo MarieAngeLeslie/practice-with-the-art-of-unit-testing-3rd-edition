@@ -1,5 +1,4 @@
-import { PasswordVerifier1, oneUppCaseRule } from "../password-verifier.js";
-
+import { PasswordVerifier1, oneUppCaseRule, verifyPassword3 } from "../password-verifier.js";
 
 const makeVerifier = () => new PasswordVerifier1();
 const passingRule = (input) => ({ passed: true, reason: '' })
@@ -16,7 +15,6 @@ const makeVerifierWithFailedRule = (reason) => {
     verifier.addRule(fakeRule)
     return verifier;
 }
-
 
 describe('verifyPassword', () => {
     describe('With a failing rule', () => {
@@ -66,4 +64,15 @@ describe('verifyPassword', () => {
             })
     });
 
+})
+
+//-------------------- Functional injection techniques -----------------------
+const SUNDAY = 0, SATURDAY = 6, MONDAY = 1;
+
+describe('verifier3 - dummy function', () => {
+    test('On weekends, throws exception', () => {
+        const alwaysSunday = () => SUNDAY;
+        expect(() => verifyPassword3('anything', [], alwaysSunday))
+            .toThrow("It's the weekend!")
+    })
 })
