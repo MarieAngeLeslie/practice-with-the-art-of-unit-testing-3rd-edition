@@ -26,7 +26,7 @@ export const oneUppCaseRule = (input) => {
     }
 }
 
-//-------------------- Functional injection techniques -----------------------
+//-------------------- dependency injection via partial -----------------------
 const SUNDAY = 0, SATURDAY = 6, MONDAY = 1;
 
 export const verifyPassword3 = (input, rules, getDayFn) => {

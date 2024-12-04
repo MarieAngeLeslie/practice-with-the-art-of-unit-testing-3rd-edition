@@ -67,12 +67,23 @@ describe('verifyPassword', () => {
 })
 
 //-------------------- Functional injection techniques -----------------------
-const SUNDAY = 0, SATURDAY = 6, MONDAY = 1;
 
-describe('verifier3 - dummy function', () => {
-    test('On weekends, throws exception', () => {
+const SUNDAY = 0, MONDAY = 1, TUESDAY = 2, WEDNESDAY = 3, FRIDAY = 4, SATURDAY = 6
+
+const _makeVerifier = (rules, dayOfWeekFn) => {
+    return function (input) {
+        if ([SUNDAY, SATURDAY].includes(dayOfWeekFn())) {
+            throw new Error("It's the weekend!")
+        }
+    }
+}
+
+describe('verifier', () => {
+    test('factory method: on weekends, throws exception', () => {
         const alwaysSunday = () => SUNDAY;
-        expect(() => verifyPassword3('anything', [], alwaysSunday))
+        const verifyPassword = _makeVerifier([], alwaysSunday)
+
+        expect(() => verifyPassword('anything'))
             .toThrow("It's the weekend!")
     })
 })
