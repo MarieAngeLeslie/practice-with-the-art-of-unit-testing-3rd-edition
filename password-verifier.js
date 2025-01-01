@@ -26,7 +26,7 @@ export const oneUppCaseRule = (input) => {
     }
 }
 
-//-------------------- dependency injection via partial -----------------------
+//-------------------- dependency injection via partialmocks -----------------------
 const SUNDAY = 0, SATURDAY = 6, MONDAY = 1;
 
 export const verifyPassword3 = (input, rules, getDayFn) => {
@@ -37,4 +37,22 @@ export const verifyPassword3 = (input, rules, getDayFn) => {
     }
 
     return [];
+}
+
+//-------------------- Object-oriented injection techniques -----------------------
+
+class PasswordVerifier {
+    constructor(rules, dayOfWeekFn) {
+        this.rules = rules;
+        this.dayOfWeek = dayOfWeekFn;
+    }
+
+    verify(input) {
+        if ([SATURDAY, SUNDAY].includes(this.dayOfWeek())) {
+            throw new Error("It's the weekend!")
+        }
+        const errros = [];
+
+        return errros;
+    }
 }
