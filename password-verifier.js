@@ -41,7 +41,7 @@ export const verifyPassword3 = (input, rules, getDayFn) => {
 
 //-------------------- Object-oriented injection techniques -----------------------
 
-class PasswordVerifier {
+export class PasswordVerifier {
     constructor(rules, dayOfWeekFn) {
         this.rules = rules;
         this.dayOfWeek = dayOfWeekFn;

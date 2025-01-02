@@ -1,4 +1,4 @@
-import { PasswordVerifier1, oneUppCaseRule, verifyPassword3 } from "../password-verifier.js";
+import { PasswordVerifier1, oneUppCaseRule, verifyPassword3, PasswordVerifier } from "../password-verifier.js";
 
 const makeVerifier = () => new PasswordVerifier1();
 const passingRule = (input) => ({ passed: true, reason: '' })
@@ -90,9 +90,25 @@ describe('verifier', () => {
 
 //-------------------- Object-oriented injection techniques -----------------------
 
-test('class constructor : on weekends, throws exception', () => {
-    const alwaysSunday = () => SUNDAY
-    const verifier = new PasswordVerifier([], alwaysSunday)
+describe('refactored with constructor', () => {
+    const makeVerifier = () => {
+        return new PasswordVerifier(rules, dayFn)
+    }
 
-    expect(() => verifier.verify('anything')).toThrow("It's the weekend!")
-});
+    test('class constructor : on weekends, throws exception', () => {
+        const alwaysSunday = () => SUNDAY
+        const verifier = makeVerifier([], alwaysSunday)
+
+        expect(() => verifier.verify('anything')).toThrow("It's the weekend!")
+    });
+
+    test('class constructor : on weekends with no rules, passes', () => {
+        const alwaysMonday = () => MONDAY
+        const verifier = makeVerifier([], alwaysMonday)
+
+        const result = verifier.verify('anything');
+        expect(result.length).toBe(0)
+    });
+
+})
+
