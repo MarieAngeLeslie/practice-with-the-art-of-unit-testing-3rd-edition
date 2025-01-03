@@ -1,3 +1,5 @@
+import { RealTimeProvider } from "./time-provider";
+
 export class PasswordVerifier1 {
     constructor() {
         this.rules = [];
@@ -42,10 +44,11 @@ export const verifyPassword3 = (input, rules, getDayFn) => {
 //-------------------- Object-oriented injection techniques -----------------------
 
 export class PasswordVerifier {
-    constructor(rules, dayOfWeekFn) {
+    constructor(rules, timeProvider) {
         this.rules = rules;
-        this.dayOfWeek = dayOfWeekFn;
+        this.timeProvider = timeProvider;
     }
+
 
     verify(input) {
         if ([SATURDAY, SUNDAY].includes(this.dayOfWeek())) {
@@ -55,4 +58,9 @@ export class PasswordVerifier {
 
         return errros;
     }
+
 }
+
+const passwordVerifierFactory = (rules) => {
+    return new PasswordVerifier(new RealTimeProvider())
+};
