@@ -51,7 +51,7 @@ export class PasswordVerifier {
 
 
     verify(input) {
-        if ([SATURDAY, SUNDAY].includes(this.dayOfWeek())) {
+        if ([SATURDAY, SUNDAY].includes(this.timeProvider())) {
             throw new Error("It's the weekend!")
         }
         const errros = [];

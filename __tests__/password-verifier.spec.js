@@ -91,7 +91,7 @@ describe('verifier', () => {
 //-------------------- Object-oriented injection techniques -----------------------
 
 describe('refactored with constructor', () => {
-    const makeVerifier = () => {
+    const makeVerifier = (rules, dayFn) => {
         return new PasswordVerifier(rules, dayFn)
     }
 
