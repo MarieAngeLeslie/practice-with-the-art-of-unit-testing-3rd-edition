@@ -3,14 +3,14 @@ import { PasswordVerifier } from '../password-verifier';
 
 //-------------------- Object-oriented code testing side -----------------------
 
+const SUNDAY = 0;
+
 class FakeTimeProvider implements TimeProviderInterface {
     fakeDay: number;
     getDay(): number {
         return this.fakeDay
     }
 }
-
-const SUNDAY = 0, MONDAY = 1, TUESDAY = 2, WEDNESDAY = 3, FRIDAY = 4, SATURDAY = 6
 
 describe('password verifier with interfaces', () => {
     test('on weekends, throws exceptions', () => {
