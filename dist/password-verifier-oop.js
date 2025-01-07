@@ -1,23 +1,16 @@
-import { TimeProviderInterface } from "./time-provider.js";
-
 const SUNDAY = 0, SATURDAY = 1;
-
 export class PasswordVerifier {
-    private _timeProvider: TimeProviderInterface;
-
-    constructor(rules: any[], timeProvider: TimeProviderInterface) {
+    _timeProvider;
+    constructor(rules, timeProvider) {
         this._timeProvider = timeProvider;
     }
-
-    verify(input: string): string[] {
+    verify(input) {
         const isWeekened = [SUNDAY, SATURDAY]
             .filter(x => x === this._timeProvider.getDay())
             .length > 0;
-
         if (isWeekened) {
-            throw new Error("It's the weekend!")
+            throw new Error("It's the weekend!");
         }
-
         return [];
     }
 }

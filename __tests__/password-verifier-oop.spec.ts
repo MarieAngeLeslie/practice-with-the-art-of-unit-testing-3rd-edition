@@ -1,12 +1,14 @@
 import { TimeProviderInterface } from '../ts-files/time-provider';
-import { PasswordVerifier } from '../password-verifier';
+import { PasswordVerifier } from '../ts-files/password-verifier-oop';
 
-//-------------------- Object-oriented code testing side -----------------------
 
 const SUNDAY = 0;
 
 class FakeTimeProvider implements TimeProviderInterface {
     fakeDay: number;
+    constructor() {
+        this.fakeDay = 0;
+    }
     getDay(): number {
         return this.fakeDay
     }
