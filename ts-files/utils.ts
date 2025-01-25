@@ -1,7 +1,3 @@
-export class FakeLogger {
-    logged = ""
-
-    info(text:string) {
-        this.logged = text
-    }
+export interface ILoger {
+    info(text: string): void
 }

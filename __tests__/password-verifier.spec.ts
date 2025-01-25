@@ -1,5 +1,15 @@
 import { PasswordVerifier } from '../ts-files/password-verifier'
-import { FakeLogger } from '../ts-files/utils';
+import { ILoger } from '../ts-files/utils';
+
+class FakeLogger implements ILoger {
+    written: string;
+    constructor() {
+        this.written = ''
+    }
+    info(text: string): void {
+        this.written = text
+    }
+}
 
 describe("duck typing with function constructor injection", () => {
     describe("password verifier", () => {
@@ -8,7 +18,7 @@ describe("duck typing with function constructor injection", () => {
             const verifier = new PasswordVerifier([], mockLog)
             verifier.verify("any input");
 
-            expect(mockLog.logged).toMatch(/PASSED/);
+            expect(mockLog.written).toMatch(/PASSED/);
         })
     })
 })

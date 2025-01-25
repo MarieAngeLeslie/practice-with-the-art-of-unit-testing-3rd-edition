@@ -1,11 +1,10 @@
-import { FakeLogger } from './utils.ts'
-
+import { ILoger } from "./utils.ts";
 
 export class PasswordVerifier {
-    private _rules;
-    private _logger;
+    private _rules: any[];
+    private _logger:ILoger;
 
-    constructor(rules: any[], logger: FakeLogger) {
+    constructor(rules: any[], logger: ILoger) {
         this._rules = rules;
         this._logger = logger
     }
